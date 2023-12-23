@@ -226,19 +226,19 @@ class ObjectDetectionBot(Bot):
                 file_name = os.path.basename(image_name)
                 new_filename = self.download_predicted_image_from_s3(file_name)
                 self.send_photo(chat_id, new_filename)
-                # self.send_text(chat_id, "Exciting news! ?? A special gift ?? is on its way to you. "
-                #                         "Just a little more patience, and it'll be yours. "
-                #                         "It's worth the wait! ??")
-                # prompt = summary
-                # image_url = self.dalle_generate_image(prompt)
-                #
-                # if image_url:
-                #     print("Image generated successfully.")
-                #     self.save_dalle_image(image_url, "generated_image.jpg")
-                # else:
-                #     print("Failed to generate image.")
-                #
-                # self.send_photo(chat_id, "generated_image.jpg")
+                self.send_text(chat_id, "Exciting news! ?? A special gift ?? is on its way to you. "
+                                        "Just a little more patience, and it'll be yours. "
+                                        "It's worth the wait! ??")
+                prompt = summary
+                image_url = self.dalle_generate_image(prompt)
+
+                if image_url:
+                    print("Image generated successfully.")
+                    self.save_dalle_image(image_url, "generated_image.jpg")
+                else:
+                    print("Failed to generate image.")
+
+                self.send_photo(chat_id, "generated_image.jpg")
             else:
                 self.send_text(chat_id, "No objects detected in the image.")
         else:
