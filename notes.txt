@@ -1,0 +1,67 @@
+                                Important Commands:-
+                                ====================
+
+Docker Installation:-
+=====================
+
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+# To install the latest version:
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo docker run hello-world
+sudo usermod -aG docker $USER
+
+# reboot
+
+newgrp docker
+docker run hello-world
+docker info
+
+
+aws cli installation:
+=====================
+
+sudo apt install awscli
+
+Ec2 public ip:
+==============
+
+curl http://ifconfig.me
+
+Docker Further Configuration:
+=============================
+
+sudo systemctl start docker
+sudo systemctl enable docker
+
+
+Docker Cleanup:
+==============
+
+echo "Stopping all running Docker containers..."
+docker stop $(docker ps -q)
+
+echo "Deleting all Docker images..."
+docker rm $(docker ps -aq) -f
+docker rmi $(docker images -q) -f
+
+aminbot:
+========
+docker run --restart unless-stopped --name amin-bot -p 8443:8443 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-bot:latest
+
+aminyolo:
+=========
+docker run --restart unless-stopped --name amin-yolo 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-yolo:latest
