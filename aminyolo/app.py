@@ -117,13 +117,6 @@ def consume():
                 with open(pred_summary_path) as f:
                     labels = f.read().splitlines()
                     labels = [line.split(' ') for line in labels]
-                    # labels = [{
-                    #     'class': names[int(l[0])],
-                    #     'cx': float(l[1]),
-                    #     'cy': float(l[2]),
-                    #     'width': float(l[3]),
-                    #     'height': float(l[4]),
-                    # } for l in labels]
                     labels = [{
                         'class': names[int(l[0])],
                         'cx': Decimal(str(l[1])),
@@ -135,15 +128,6 @@ def consume():
                 logger.info(f'prediction: {prediction_id}/{original_img_path}. prediction summary:\n\n{labels}')
                 predicted_img_path = str(Path(f'static/data/{prediction_id}/{original_img_path}'))
 
-                # prediction_summary = {
-                #     'prediction_id': prediction_id,
-                #     'chat_id': chat_id,
-                #     'there_is_prediction': 'Yes',
-                #     'original_img_path': original_img_path,
-                #     'predicted_img_path': predicted_img_path,
-                #     'labels': labels,
-                #     'time': time.time()
-                # }
                 prediction_summary = {
                     'prediction_id': prediction_id,
                     'chat_id': chat_id,
@@ -158,16 +142,6 @@ def consume():
 
             else:
                 logger.info ("\n\n ELSE \n\n")
-                # dbresponse = table.put_item(Item={
-                #     'prediction_id': prediction_id,
-                #     'chat_id': chat_id,
-                #     'there_is_prediction': 'No',
-                #     'original_img_path': '',
-                #     'predicted_img_path': '',
-                #     ' ': [{'class': "", 'cx': 0, 'cy': 0, 'width': 0, 'height': 0}],
-                #     'time': time.time()
-                # })
-
                 prediction_summary = {
                     'prediction_id': prediction_id,
                     'chat_id': chat_id,
@@ -211,31 +185,6 @@ def consume():
 
             except (BotoCoreError, ClientError, Exception) as error:
                 logger.info(f"An error occurred: {error}")
-
-            # try:
-            #     if dbresponse.get('ResponseMetadata', {}).get('HTTPStatusCode') == 200:
-            #         logger.info("Data inserted successfully into DynamoDB.")
-            #
-            #         other_flask_server_url = TELEGRAM_APP_URL
-            #         params = {'predictionId': prediction_summary['prediction_id']}
-            #         get_response = requests.get(other_flask_server_url, params=params, verify=False)
-            #
-            #         if get_response.status_code == 200:
-            #             # try:
-            #             #     response_json = get_response.json()
-            #             #     logger.info("GET request to aminbot was successful.")
-            #             #     logger.info("Response:", response_json)
-            #             # except json.JSONDecodeError:
-            #             #     logger.error("Failed to parse JSON response.")
-            #             logger.info("GET request to aminbot was successful.")
-            #
-            #         else:
-            #             logger.info("GET request to aminbot failed.")
-            #             logger.info("Status Code:", get_response.status_code)
-            #     else:
-            #         logger.info("Data insertion might have failed. Response:", dbresponse)
-            # except (BotoCoreError, ClientError, Exception) as error:
-            #     logger.info(f"An error occurred: {error}")
 
 
 if __name__ == "__main__":
