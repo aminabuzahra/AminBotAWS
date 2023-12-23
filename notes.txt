@@ -1,5 +1,10 @@
                                 Important Commands:-
                                 ====================
+Creating a certificate:
+=======================
+
+openssl req -newkey rsa:2048 -sha256 -nodes -keyout aminbotprivate.key -x509 -days 365 -out aminbotpublickey.pem -subj "/C=IL/ST=Jerusalem/L=Jerusalem/O=AminAbuZahra/CN=amin-load-balancer-984022966.eu-west-2.elb.amazonaws.com"
+
 
 Docker Installation:-
 =====================
@@ -58,10 +63,30 @@ echo "Deleting all Docker images..."
 docker rm $(docker ps -aq) -f
 docker rmi $(docker images -q) -f
 
+ECR login:
+==========
+
+aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 933060838752.dkr.ecr.eu-west-2.amazonaws.com
+
 aminbot:
 ========
+docker build -t amin-bot .
+
+docker build --no-cache -t amin-bot .
+
+docker tag amin-bot:latest 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-bot:latest
+docker push 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-bot:latest
+docker pull 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-bot:latest
 docker run --restart unless-stopped --name amin-bot -p 8443:8443 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-bot:latest
 
 aminyolo:
 =========
+
+docker build -t amin-yolo .
+
+docker build --no-cache -t amin-yolo .
+
+docker tag amin-yolo:latest 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-yolo:latest
+docker push 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-yolo:latest
+docker pull 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-yolo:latest
 docker run --restart unless-stopped --name amin-yolo 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-yolo:latest
