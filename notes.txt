@@ -94,7 +94,6 @@ docker tag amin-yolo:latest 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-yo
 docker push 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-yolo:latest
 
 docker pull 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-yolo:latest
-
 docker run --restart=always --name amin-yolo 933060838752.dkr.ecr.eu-west-2.amazonaws.com/amin-yolo:latest
 
 docker start amin-yolo
