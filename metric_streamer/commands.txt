@@ -1,0 +1,2 @@
+aws autoscaling put-scaling-policy --auto-scaling-group-name amin-yolo-auto-scaling-group --policy-name amin-bot-auto-scaling-policy --policy-type TargetTrackingScaling --target-tracking-configuration file://config.json --region eu-west-2
+

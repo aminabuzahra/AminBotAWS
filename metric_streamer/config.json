@@ -1,0 +1,16 @@
+{
+  "CustomizedMetricSpecification": {
+    "MetricName": "BacklogPerInstance",
+    "Namespace": "aminbot",
+    "Dimensions": [
+      {
+        "Name": "AutoScalingGroupName",
+        "Value": "amin-yolo-auto-scaling-group"
+      }
+    ],
+    "Statistic": "Average",
+    "Unit": "Count"
+  },
+  "TargetValue": 10,
+  "DisableScaleIn": false
+}
