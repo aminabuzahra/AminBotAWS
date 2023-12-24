@@ -5,7 +5,7 @@ import os
 
 def lambda_handler(event, context):
     secrets_client = boto3.client('secretsmanager')
-    secret_name = os.environ['CONFIG_SECRET_NAME']  # Make sure to set this in Lambda env variables
+    secret_name = os.environ['CONFIG_SECRET_NAME']
 
     try:
         response = secrets_client.get_secret_value(SecretId=secret_name)
