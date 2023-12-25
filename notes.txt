@@ -5,7 +5,6 @@ Creating a certificate:
 
 openssl req -newkey rsa:2048 -sha256 -nodes -keyout aminbotprivate.key -x509 -days 365 -out aminbotpublickey.pem -subj "/C=IL/ST=Jerusalem/L=Jerusalem/O=AminAbuZahra/CN=amin-load-balancer-984022966.eu-west-2.elb.amazonaws.com"
 
-
 Docker Installation:-
 =====================
 
@@ -61,6 +60,19 @@ docker stop $(docker ps -q)
 echo "Deleting all Docker images..."
 docker rm $(docker ps -aq) -f
 docker rmi $(docker images -q) -f
+
+SSH and Secure Copy:
+============
+
+ssh -i "amin-bot-key.pem" ubuntu@18.130.173.91
+
+scp -r -i amin-bot-key.pem /directory ubuntu@18.130.173.91:/directory
+
+
+Removing a directory:
+=====================
+
+sudo rm -r ./polybot
 
 ECR login:
 ==========

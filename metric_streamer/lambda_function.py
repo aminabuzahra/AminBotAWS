@@ -14,6 +14,7 @@ def lambda_handler(event, context):
         QUEUE_URL = secret['SQS_URL']
         AUTOSCALING_GROUP_NAME = secret['AUTOSCALING_GROUP_NAME']
         CLOUDWATCH_NAMESPACE = secret['CLOUDWATCH_NAMESPACE']
+
     except Exception as e:
         print(f"Error retrieving secret: {str(e)}")
         raise e
